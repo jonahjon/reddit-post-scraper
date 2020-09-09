@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python"
+name = "backend"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -12,6 +12,7 @@ uvicorn = "^0.11.8"
 praw = "^7.1.0"
 python-dotenv = "^0.14.0"
 pytest = {version = "^6.0.1", python = "3.7"}
+flake8 = "^3.8.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
