@@ -1,4 +1,4 @@
-
+# Docker ECS Feature List
 | Features | Current | Edge/GA | 
 | ----------- | ----------- | -----------
 | Secrets | :heavy_check_mark: | :heavy_check_mark: |
@@ -9,6 +9,7 @@
 
 -----------
 
+# Docker ECS Plugin Command Diff
 | Command | Current | Edge/GA |
 | ----------- | ----------- | -----------
 | setup | `docker ecs setup` | `docker context create` |
