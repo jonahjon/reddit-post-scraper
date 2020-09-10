@@ -5,10 +5,5 @@ client = TestClient(app)
 
 
 def test_read_main():
-    response = client.get("/info")
+    response = client.get("/top/jokes")
     assert response.status_code == 200
-    assert response.json() == {
-        "client_id": "test_id",
-        "client_secret": "test_secret",
-        "user_agent": "test_user_agent"
-    }

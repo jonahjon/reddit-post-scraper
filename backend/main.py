@@ -1,10 +1,9 @@
 from typing import Optional
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from pydantic import BaseModel
 from backend.config import config
 from functools import lru_cache
-import numpy as np
-import praw
+import random
 
 app = FastAPI()
 
@@ -34,17 +33,25 @@ def update_item(item_id: int, item: Item):
 def get_settings():
     return config.reddit
 
+
 @app.get("/top/{sub}")
-def top_10(sub: str):
+def top_10(sub: str, over_18: Optional[bool] = False):
     reddit = get_settings()
     post_list = []
     post_limit = 10
+    # Grab posts, have filter for nfsw
     for submission in reddit.subreddit(sub).hot(limit=post_limit):
-        print(submission.selftext)
-        post_list.append(submission.title)
-    random_post = np.random.choice(post_list, size=1, replace=False)
-    print(random_post)
-    return {"title": random_post[0], "punchline": "haha"}
+        row = []
+        if over_18:
+            row.append([submission.title, submission.selftext])
+        else:
+            if submission.over_18:
+                continue
+            else:
+                row.append([submission.title, submission.selftext])
+        post_list.append(row)
+    random_post = random.choice(post_list)
+    return {"title": random_post[0][0], "punchline": random_post[0][1]}
 
 
 # @app.get("/info")
